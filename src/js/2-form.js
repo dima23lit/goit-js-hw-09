@@ -8,7 +8,7 @@ feedbackForm.addEventListener('input', getInput);
 feedbackForm.addEventListener('submit', onButton); 
 
 function getInput(evt) {
-    formData[evt.target.name] = evt.target.value;
+    formData[evt.target.name] = evt.target.value.trim();
     localStorage.setItem("feedback-form-state", JSON.stringify(formData));
 }
 
