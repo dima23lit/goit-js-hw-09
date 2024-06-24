@@ -1,7 +1,8 @@
 let formData = { email: "", message: "" };
 const feedbackForm = document.querySelector('.feedback-form');
-const modalInput = document.querySelector('.modal-input')
-const modalTextArea = document.querySelector('.modal-text-area')
+const modalInput = feedbackForm.email
+const modalTextArea = feedbackForm.message
+
 
 feedbackForm.addEventListener('input', getInput); 
 feedbackForm.addEventListener('submit', onButton); 
@@ -13,7 +14,7 @@ function getInput(evt) {
 
 function onButton(evt) {
     evt.preventDefault()
-    if (modalInput.value === "" || modalInput.value.includes(" ") || modalTextArea.value === "" || modalTextArea.value.includes(" ")) {
+    if (modalInput.value === "" || modalTextArea.value === "") {
         alert("«Fill please all fields»")
     } else {
         console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
@@ -21,5 +22,14 @@ function onButton(evt) {
         modalInput.value = "";
         modalTextArea.value = "";
         formData = { email: "", message: "" }
+        evt.currentTarget.reset();
     }
+}
+
+const localState = JSON.parse(localStorage.getItem("feedback-form-state"));
+
+if (localState) {
+  for (const key of Object.keys(localState)) {
+    document.querySelector(`[name="${key}"]`).value = localState[key];
+  }
 }
