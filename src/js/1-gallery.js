@@ -1,6 +1,5 @@
-// Описаний в документації
 import SimpleLightbox from "simplelightbox";
-// Додатковий імпорт стилів
+
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 
@@ -86,8 +85,12 @@ const makeGallery = images.map(({ preview, original, description }) =>
 gallery.insertAdjacentHTML("beforeend", makeGallery)
 
 
-// new SimpleLightbox('.gallery-link', {elements: '.gallery-link'});
+let simpleLightboxnew = new SimpleLightbox('.gallery li a', {
+    captions: true,
+    captionSelector: 'a img',
+    captionType: 'attr',
+    captionsData: 'alt',
+    captionDelay: 250
+});
 
-// gallery.on('show.simplelightbox', function () {
-
-// });
+simpleLightboxnew.on("show.simplelightbox")
