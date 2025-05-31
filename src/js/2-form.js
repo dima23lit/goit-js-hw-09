@@ -4,12 +4,10 @@ let formData = {
 }; 
 
 const form = document.querySelector('.feedback-form');
-const formInput = document.querySelector('.form-input');
-const formTextArea = document.querySelector('.form-text-area');
 
-form.addEventListener('input', formF);
+form.addEventListener('input', handleInputEvent);
 
-function formF(event) {
+function handleInputEvent(event) {
     if (event.target.nodeName === 'INPUT') {
         formData.email = event.target.value
     }
@@ -23,27 +21,29 @@ if (!(localStorage.getItem("feedback-form-state") === null)) {
     let usedFormDate = JSON.parse(localStorage.getItem("feedback-form-state"));
     formData.email = usedFormDate.email;
     formData.message = usedFormDate.message;
-    formInput.value = usedFormDate.email;
-    formTextArea.value = usedFormDate.message;
+    document.querySelector('[name="email"]').value = usedFormDate.email;
+    document.querySelector('[name="message"]').value = usedFormDate.message;
 } else {
     formData.email = "";
     formData.message = "";
 }
 
-form.addEventListener('submit', formSubmit)
+form.addEventListener('submit', handleFormSubmit)
 
-function formSubmit(event) {
+function handleFormSubmit(event) {
     event.preventDefault();
-    console.log(event)
-    if (event.target.elements[0].value === "" || event.target.elements[1].value === "") {
+
+    // if (event.target.elements[0].value === "" || event.target.elements[1].value === "")
+    
+    if (formData.email === "" || formData.message === "") {
         alert('Fill please all fields')
     } else {
         console.log(formData);
         formData.email = "";
         formData.message = "";
-        formInput.value = "";
-        formTextArea.value = "";
-        localStorage.clear();
+        document.querySelector('[name="email"]').value = "";
+        document.querySelector('[name="message"]').value = "";
+        localStorage.removeItem("feedback-form-state");
     }
 
     form.reset()
