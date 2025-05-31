@@ -34,7 +34,7 @@ function handleFormSubmit(event) {
     event.preventDefault();
 
     // if (event.target.elements[0].value === "" || event.target.elements[1].value === "")
-    
+
     if (formData.email === "" || formData.message === "") {
         alert('Fill please all fields')
     } else {
