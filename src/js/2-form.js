@@ -45,6 +45,4 @@ function handleFormSubmit(event) {
         document.querySelector('[name="message"]').value = "";
         localStorage.removeItem("feedback-form-state");
     }
-
-    form.reset()
 }
